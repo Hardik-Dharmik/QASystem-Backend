@@ -11,7 +11,8 @@ API_URL = "https://api-inference.huggingface.co/models/hd94/roberta-hindi"
 def query(payload):
     data = json.dumps(payload)
     response = requests.request("POST", API_URL, headers=headers, data=data)
-    return json.loads(response.content.decode("utf-8"))
+    resp = json.loads(response.content.decode("utf-8"))
+    return resp["answer"]
 
 
 def index(request):
@@ -26,6 +27,5 @@ def index(request):
                 }
             }
         )
-
-        return JsonResponse({'data' : data})
+        return JsonResponse({'answer' : data})
     return JsonResponse({'error' : 'ERROR!!!'})
