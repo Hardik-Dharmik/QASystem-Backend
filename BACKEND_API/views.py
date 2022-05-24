@@ -28,8 +28,13 @@ def index(request):
             }
         )
 
-        if status_code != 200:
-            return JsonResponse({'answer' : data, 'status' : status_code, "error" : True})
+        if status_code == 500:
+            return JsonResponse({'answer' : "Internal Server Error !!", 'status' : status_code, "error" : True})
 
-        return JsonResponse({'answer' : data, 'status' : status_code, "error" : False})
+        if status_code == 400:
+            return JsonResponse({'answer' : "Bad Request from Client !!", 'status' : status_code, "error" : True})
+
+        if status_code == 200:
+            return JsonResponse({'answer' : data, 'status' : status_code, "error" : False})
+            
     return JsonResponse({'error' : 'ERROR!!!'})
