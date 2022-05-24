@@ -12,7 +12,7 @@ def query(payload):
     data = json.dumps(payload)
     response = requests.request("POST", API_URL, headers=headers, data=data)
     resp = json.loads(response.content.decode("utf-8"))
-    return resp["answer"]
+    return resp["answer"], response.status_code
 
 
 def index(request):
@@ -20,12 +20,16 @@ def index(request):
         context = request.POST.get('context')
         question = request.POST.get('question')
 
-        data = query({
+        data, status_code = query({
                 "inputs": {
                     "question": question,
                     "context": context,
                 }
             }
         )
-        return JsonResponse({'answer' : data})
+
+        if status_code != 200:
+            return JsonResponse({'answer' : data, 'status' : status_code, "error" : True})
+
+        return JsonResponse({'answer' : data, 'status' : status_code, "error" : False})
     return JsonResponse({'error' : 'ERROR!!!'})
