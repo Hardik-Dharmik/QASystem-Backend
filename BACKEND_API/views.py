@@ -43,4 +43,4 @@ def index(request):
         if status_code == 200:
             return JsonResponse({'answer' : data, 'status' : status_code, "error" : False})
 
-    return JsonResponse({'error' : 'ERROR!!!'})
+    return JsonResponse({'answer' : 'Something went wrong', 'status' : 404, "error" : True})
