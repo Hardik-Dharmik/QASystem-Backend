@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-ajnq+lwkq6n6^22sgy55gh&t86bz!at-k&p*@7+^2%lx^v&b50
 
 
 # ALLOWED_HOSTS, DEBUG = [], True
-ALLOWED_HOSTS, DEBUG = ['https://hindi-qa.herokuapp.com', 'localhost', '127.0.0.1'], False
+ALLOWED_HOSTS, DEBUG = ['https://hindi-qa.herokuapp.com', 'localhost', '127.0.0.1'], False  
 
 
 # Application definition
@@ -53,6 +53,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware'
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
 )
