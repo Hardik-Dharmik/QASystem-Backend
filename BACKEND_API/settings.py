@@ -27,8 +27,8 @@ SECRET_KEY = 'django-insecure-ajnq+lwkq6n6^22sgy55gh&t86bz!at-k&p*@7+^2%lx^v&b50
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-# ALLOWED_HOSTS, DEBUG = [], True
-ALLOWED_HOSTS, DEBUG = ['https://hindi-qa.herokuapp.com', 'localhost', '127.0.0.1'], False
+ALLOWED_HOSTS, DEBUG = [], True
+# ALLOWED_HOSTS, DEBUG = ['https://hindi-qa.herokuapp.com', 'localhost', '127.0.0.1'], False
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -50,8 +51,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
-
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+)
 ROOT_URLCONF = 'BACKEND_API.urls'
 
 TEMPLATES = [

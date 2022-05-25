@@ -12,6 +12,10 @@ def query(payload):
     data = json.dumps(payload)
     response = requests.request("POST", API_URL, headers=headers, data=data)
     resp = json.loads(response.content.decode("utf-8"))
+
+    if response.status_code != 200:
+        return "Error", response.status_code
+
     return resp["answer"], response.status_code
 
 
@@ -28,6 +32,8 @@ def index(request):
             }
         )
 
+        print(status_code)
+
         if status_code == 500:
             return JsonResponse({'answer' : "Internal Server Error !!", 'status' : status_code, "error" : True})
 
@@ -36,5 +42,5 @@ def index(request):
 
         if status_code == 200:
             return JsonResponse({'answer' : data, 'status' : status_code, "error" : False})
-            
+
     return JsonResponse({'error' : 'ERROR!!!'})
